@@ -25,6 +25,122 @@
             background-color: #F8F5EE; 
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- NEW NAVBAR STYLES --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #FFFFFF;
+            position: relative;
+            z-index: 100;
+        }
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand-text-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        .brand-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #000000;
+            line-height: 1.1;
+        }
+        .brand-subtitle {
+            font-size: 11px;
+            color: #333333;
+            margin-top: 3px;
+        }
+        .hamburger-menu {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 5px;
+        }
+        .hamburger-menu span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background-color: #000000;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Dropdown Nav Links */
+        .nav-links {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            background-color: #FFFFFF;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eaeaea;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            z-index: 99;
+        }
+        .nav-links.active {
+            display: flex; /* Shown when hamburger is clicked */
+        }
+        .nav-links li {
+            list-style: none;
+            margin: 12px 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #2F4454;
+            font-weight: 700;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+        .nav-links a:hover {
+            color: #D19A56;
+        }
+
+        /* Desktop specific enhancements (if container is expanded later) */
+        @media (min-width: 768px) {
+            .container {
+                /* If you ever want to make the page full width on desktop, 
+                   the nav links will automatically adapt to a horizontal row here */
+                max-width: 100%; 
+            }
+            /* Uncomment below if you remove the 480px container constraint and want a standard desktop menu */
+            /*
+            .hamburger-menu { display: none; }
+            .nav-links {
+                display: flex !important;
+                flex-direction: row;
+                position: static;
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                gap: 20px;
+            }
+            */
+        }
+
+        /* --- NEW HERO BANNER STYLES --- */
+        .hero-banner {
+            background-color: #FFBF00;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 25px 20px;
+            border-bottom: 4px solid #D19A56;
+        }
+        .hero-banner h2 {
+            font-size: 34px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 0;
         }
 
         /* Global Button Style */
@@ -360,6 +476,37 @@
 
 <div class="container">
     
+    <nav class="navbar">
+        <div class="nav-brand">
+            <svg width="38" height="38" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="16" fill="#000000"/>
+                <circle cx="28" cy="62" r="10" fill="#FFFFFF"/>
+                <line x1="38" y1="78" x2="72" y2="38" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
+            </svg>
+            <div class="brand-text-wrapper">
+                <span class="brand-title">Faasos WebTech</span>
+                <span class="brand-subtitle">Crafting Custom Solutions for Businesses.</span>
+            </div>
+        </div>
+        
+        <div class="hamburger-menu" id="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-links" id="nav-dropdown">
+            <li><a href="#">Home page</a></li>
+            <li><a href="#">Repeat Pro SMS</a></li>
+            <li><a href="#">Review Management System</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero-banner">
+        <h2>REPEAT PRO SMS</h2>
+    </div>
+    
     <div class="intro-section">
         <h1>Turn One-Time Clients into Loyal Customers with Automated SMS</h1>
         <p>At Faasos WebTech, we understand how important it is to keep your customers coming back. Repeat Pro SMS is a simple yet powerful service designed to build lasting relationships with your clients.</p>
@@ -512,6 +659,15 @@
     </div>
 
 </div>
+
+<script>
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const navDropdown = document.getElementById('nav-dropdown');
+
+    menuBtn.addEventListener('click', () => {
+        navDropdown.classList.toggle('active');
+    });
+</script>
 
 </body>
 </html>
