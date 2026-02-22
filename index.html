@@ -142,6 +142,52 @@
             letter-spacing: 2px;
             margin: 0;
         }
+  
+        /* --- Option 1: Neon Cyber --- */
+        .hero-v1 { background: #050505; padding: 45px 20px; text-align: center; }
+        .hero-v1 h2 { color: #FFFFFF; font-size: 26px; font-weight: 900; letter-spacing: 3px; margin: 0; text-shadow: 0 0 10px rgba(255, 183, 43, 0.6), 0 0 20px rgba(255, 183, 43, 0.4); text-transform: uppercase; }
+
+        /* --- Option 2: Modern SaaS Gradient --- */
+        .hero-v2 { background: linear-gradient(135deg, #FFB72B 0%, #D19A56 100%); padding: 50px 20px; text-align: center; border-bottom: 3px solid #2F4454; }
+        .hero-v2 h2 { color: #FFFFFF; font-size: 28px; font-weight: 900; letter-spacing: 1px; margin: 0; text-transform: uppercase; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        /* --- Option 3: Ultra-Minimalist --- */
+        .hero-v3 { background: #FFFFFF; padding: 40px 20px; text-align: center; border-bottom: 1px solid #eaeaea; }
+        .hero-v3 h2 { color: #000000; font-size: 24px; font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin: 0; }
+        .hero-v3 .accent-line { display: block; width: 50px; height: 3px; background: #FFB72B; margin: 15px auto 0; border-radius: 2px; }
+
+        /* --- Option 4: Glassmorphism --- */
+        .hero-v4 { background: linear-gradient(45deg, #2F4454, #1a2630); padding: 40px 20px; text-align: center; display: flex; justify-content: center; }
+        .hero-v4 .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px); padding: 20px 30px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px rgba(0,0,0,0.2); width: 100%; }
+        .hero-v4 h2 { color: #FFB72B; font-size: 24px; font-weight: 800; margin: 0; letter-spacing: 2px; }
+
+        /* --- Option 5: Trust Badge --- */
+        .hero-v5 { background: #F8F5EE; padding: 45px 20px; text-align: center; border-bottom: 1px solid #e0e0e0; }
+        .hero-v5 .badge { display: inline-block; background: #2F4454; color: #FFFFFF; font-size: 10px; font-weight: 800; padding: 5px 12px; border-radius: 20px; margin-bottom: 12px; letter-spacing: 1.5px; text-transform: uppercase; }
+        .hero-v5 h2 { color: #000000; font-size: 28px; font-weight: 900; margin: 0; letter-spacing: -0.5px; }
+
+        /* --- Option 6: Tech Grid --- */
+        .hero-v6 { background-color: #111111; background-image: radial-gradient(#444444 1px, transparent 1px); background-size: 15px 15px; padding: 50px 20px; text-align: center; border-bottom: 2px solid #FFB72B; }
+        .hero-v6 h2 { color: #FFB72B; background: #000000; display: inline-block; padding: 10px 20px; font-size: 24px; font-weight: 900; letter-spacing: 3px; margin: 0; border: 1px solid #333; border-radius: 6px; }
+
+        /* --- Option 7: Brutalist Pop --- */
+        .hero-v7 { background: #FFFFFF; padding: 45px 20px; text-align: center; border-bottom: 3px solid #000000; }
+        .hero-v7 h2 { color: #000000; font-size: 32px; font-weight: 900; text-transform: uppercase; margin: 0; letter-spacing: 1px; text-shadow: 3px 3px 0px #FFB72B; border: 2px solid #000; display: inline-block; padding: 10px 20px; }
+
+        /* --- Option 8: Dynamic Slant --- */
+        .hero-v8 { background: #2F4454; padding: 50px 20px 60px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); margin-bottom: -20px; }
+        .hero-v8 h2 { color: #FFB72B; font-size: 26px; font-weight: 900; letter-spacing: 2px; margin: 0; }
+        /* Fix spacing for the slant to sit right in the preview */
+        .slant-wrapper { padding-bottom: 20px; background: #FFFFFF; }
+
+        /* --- Option 9: Modern Luxury --- */
+        .hero-v9 { background: #1A1A1A; padding: 45px 20px; text-align: center; border-bottom: 1px solid #333; }
+        .hero-v9 h2 { color: #D19A56; font-family: "Georgia", "Times New Roman", serif; font-size: 30px; font-weight: normal; font-style: italic; letter-spacing: 1px; margin: 0; }
+
+        /* --- Option 10: App Header --- */
+        .hero-v10 { background: #FFFFFF; padding: 30px 20px; border-bottom: 1px solid #eaeaea; display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .hero-v10 .icon-box { background: #FFB72B; color: #000000; width: 44px; height: 44px; display: flex; justify-content: center; align-items: center; border-radius: 10px; font-weight: bold; font-size: 22px; flex-shrink: 0; }
+        .hero-v10 h2 { color: #2F4454; font-size: 22px; font-weight: 800; margin: 0; letter-spacing: 0.5px; line-height: 1.1; text-align: left; }
 
         /* Global Button Style */
         .cta-button {
@@ -316,9 +362,10 @@
         }
         .pricing-img-placeholder {
             width: 100%;
-            height: 180px;
+            height: 280px;
+            
             background-color: #FFCBE6;
-            background-image: url('https://via.placeholder.com/480x180/FFCBE6/385160?text=Illustration+Placeholder');
+            background-image: url('https://static.wixstatic.com/media/11062b_07efd662764c4648a2e46dbf3b6dafa4~mv2.jpg/v1/fill/w_466,h_740,fp_0.23_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/11062b_07efd662764c4648a2e46dbf3b6dafa4~mv2.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -503,9 +550,15 @@
         </ul>
     </nav>
 
-    <div class="hero-banner">
-        <h2>REPEAT PRO SMS</h2>
+     
+     <div class="container">
+        <div class="hero-v4">
+            <div class="glass-card">
+                <h2>REPEAT PRO SMS</h2>
+            </div>
+        </div>
     </div>
+    
     
     <div class="intro-section">
         <h1>Turn One-Time Clients into Loyal Customers with Automated SMS</h1>
