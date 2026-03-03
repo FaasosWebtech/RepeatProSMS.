@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repeat Pro SMS | High-Converting Landing Page</title>
-    <!-- Meta Pixel Code -->
-<script>
+    <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -20,8 +19,7 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
 /></noscript>
-<!-- End Meta Pixel Code -->
-    <style>
+<style>
         /* Base Reset & Typography */
         * {
             box-sizing: border-box;
@@ -566,7 +564,7 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
         <p>Our service ensures they never forget about your business, driving repeat visits and boosting your revenue effortlessly.</p>
         
         <div class="hero-cta-wrapper">
-            <a href="https://buy.stripe.com/3cIfZiepAecacpLbdg97G00" class="cta-button">Start Your 30-Day Free Trial</a>
+            <a href="https://buy.stripe.com/3cIfZiepAecacpLbdg97G00" class="cta-button" data-name="Hero Free Trial Button">Start Your 30-Day Free Trial</a>
         </div>
     </div>
 
@@ -670,7 +668,7 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
                 Valid until canceled &bull; 30 day free trial
             </div>
 
-            <a href="https://buy.stripe.com/3cIfZiepAecacpLbdg97G00" class="cta-button">Start Free Trial</a>
+            <a href="https://buy.stripe.com/3cIfZiepAecacpLbdg97G00" class="cta-button" data-name="Pricing Free Trial Button">Start Free Trial</a>
             
             <p class="micro-copy">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -714,19 +712,72 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
 </div>
 
 <script>
+    // --- Mobile Menu Script ---
     const menuBtn = document.getElementById('mobile-menu-btn');
     const navDropdown = document.getElementById('nav-dropdown');
 
     menuBtn.addEventListener('click', () => {
         navDropdown.classList.toggle('active');
     });
+
+    // --- Discord Webhook Tracker Script ---
+    // 1. PASTE YOUR DISCORD WEBHOOK URL HERE
+    const webhookUrl = "https://discord.com/api/webhooks/1478339750120390827/SHvff8lSTthQlUFaUsT7jnhwhfPTH81HwoFPnUSa0E3NUilgrjxOdSMpGLkHd516pk_P";
+
+    // 2. Find ALL buttons on the page with the class 'cta-button'
+    const buttons = document.querySelectorAll(".cta-button");
+
+    buttons.forEach(function(button) {
+      button.addEventListener("click", function(event) {
+        
+        // Prevent the link from instantly redirecting to Stripe
+        event.preventDefault();
+        
+        // Grab info about the click
+        const buttonName = this.getAttribute("data-name") || "A CTA Button";
+        const targetUrl = this.getAttribute("href"); // The Stripe link
+        const currentTime = new Date().toLocaleString(); 
+        const currentPage = window.location.href;        
+        
+        // Format the message
+        const messageData = {
+          username: "Faasos Sales Bot", 
+          embeds: [{
+            title: "🚨 Someone Clicked 'Start Trial'!",
+            description: `A user clicked the **${buttonName}**. Redirecting them to Stripe checkout...`,
+            color: 3447003, 
+            fields: [
+              {
+                name: "⏰ Time",
+                value: currentTime,
+                inline: true
+              },
+              {
+                name: "📄 Page URL",
+                value: currentPage,
+                inline: false 
+              }
+            ]
+          }]
+        };
+
+        // Send the message to Discord
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(messageData)
+        })
+        .finally(() => {
+          // This ensures that no matter what happens (even if the Discord message fails),
+          // the user is immediately sent to the Stripe checkout page!
+          window.location.href = targetUrl;
+        });
+
+      });
+    });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
