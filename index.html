@@ -228,6 +228,9 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
         }
         .hero-cta-wrapper {
             margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         /* Core Features Section */
@@ -519,6 +522,57 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
             padding: 15px;
             font-size: 10px;
         }
+
+        /* --- LIVE DEMO MODAL CSS --- */
+        :root {
+            --primary: #2F4454; /* Updated to match site branding */
+            --primary-hover: #1a2630;
+            --bg-color: #f4f7f6;
+            --text-main: #333;
+            --border-color: #ccc;
+            --error: #d9534f;
+            --success: #28a745;
+        }
+        
+        .trigger-btn { background: var(--primary); color: white; padding: 14px 30px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: 800; width: 100%; transition: background 0.2s ease; }
+        .trigger-btn:hover { background: var(--primary-hover); }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+
+        .modal-content { background: white; width: 90%; max-width: 500px; border-radius: 12px; padding: 30px; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; color: var(--text-main); font-family: 'Inter', sans-serif;}
+        
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #888; transition: color 0.2s; }
+        .close-btn:hover { color: var(--error); }
+
+        .modal-content h2 { margin-top: 0; font-size: 22px; margin-bottom: 5px; font-weight: 800;}
+        .geo-notice { background: #fff3cd; color: #856404; padding: 10px; border-radius: 6px; font-size: 13px; margin-bottom: 20px; border: 1px solid #ffeeba; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
+        .modal-content input[type="text"], .modal-content input[type="email"], .modal-content input[type="tel"], .modal-content textarea, .modal-content input[type="file"] { width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px; box-sizing: border-box; font-family: 'Inter', sans-serif;}
+        .modal-content input:focus, .modal-content textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(47,68,84,0.1); }
+        .modal-content textarea { resize: vertical; min-height: 80px; }
+        
+        .step { display: none; }
+        .step.active { display: block; }
+        
+        .helper-text { font-size: 12px; color: #666; margin-top: 4px; display: block; }
+        .error-msg { color: var(--error); font-size: 12px; margin-top: 4px; display: none; }
+        .template-link { color: #D19A56; text-decoration: none; font-weight: bold; cursor: pointer; }
+        .template-link:hover { text-decoration: underline; }
+
+        .btn-row { display: flex; justify-content: space-between; margin-top: 20px; }
+        .modal-btn { padding: 10px 20px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; font-weight: bold; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-primary:disabled { background: #96a1a8; cursor: not-allowed; }
+        .btn-secondary { background: #e2e6ea; color: #333; }
+        .btn-secondary:hover { background: #dae0e5; }
+
+        .success-screen { display: none; text-align: center; padding: 20px 0; }
+        .success-screen.active { display: block; }
+        .success-icon { font-size: 60px; color: var(--success); margin-bottom: 15px; }
     </style>
 </head>
 <body>
@@ -565,6 +619,8 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
         
         <div class="hero-cta-wrapper">
             <a href="https://buy.stripe.com/3cIfZiepAecacpLbdg97G00" class="cta-button" data-name="Hero Free Trial Button">Start Your 30-Day Free Trial</a>
+            
+            <button class="trigger-btn" id="openModalBtn">Try Live Demo</button>
         </div>
     </div>
 
@@ -709,6 +765,84 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
         &copy; 2026 by Faasos WebTech. All rights reserved.
     </div>
 
+</div> <div class="modal-overlay" id="smsModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModalBtn">&times;</span>
+    
+    <form id="blastForm">
+      
+      <div class="step active" id="step1">
+        <h2>Live Demo Setup</h2>
+        <div class="geo-notice">📍 Note: This live demo feature is currently available exclusively for Australian numbers only.</div>
+        
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="lead_name" required>
+        </div>
+        <div class="form-group">
+          <label>Business Name</label>
+          <input type="text" id="lead_business" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="lead_email" required>
+        </div>
+        <div class="form-group">
+          <label>Your Phone Number</label>
+          <input type="tel" id="lead_phone" placeholder="+61..." required>
+        </div>
+        
+        <div class="btn-row" style="justify-content: flex-end;">
+          <button type="button" class="modal-btn btn-primary" id="nextBtn">Next: Campaign Setup &rarr;</button>
+        </div>
+      </div>
+
+      <div class="step" id="step2">
+        <h2>Configure Your Blast</h2>
+        
+        <div class="form-group">
+          <label>Campaign Message</label>
+          <textarea id="campaign_message" placeholder="Type your SMS content here..." required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Recipient List (Max 50 Numbers for demo)</label>
+          <span class="helper-text">Paste Australian numbers below (one per line).</span>
+          <textarea id="recipient_list" placeholder="0412345678&#10;0487654321" required></textarea>
+          <div class="error-msg" id="recipientError">Maximum of 50 numbers allowed.</div>
+          
+          <div style="background: #f8f9fa; border: 1px solid #e9ecef; padding: 10px; border-radius: 6px; margin-top: 15px;">
+            <span class="helper-text" style="margin-top:0; color: #333;"><strong>Upload a CSV List:</strong></span>
+            <span class="helper-text" style="margin-bottom: 8px;">Only <strong>.csv</strong> files are accepted. If you use Excel, select "Save As" and choose CSV. 
+ <br>            
+              <a href="#" id="downloadTemplate" class="template-link">or Download .CSV Template</a></span>
+            <input type="file" id="file_upload" accept=".csv">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Test Numbers (Up to 3)</label>
+          <span class="helper-text">We will send the sms blast here so you can verify it.</span>
+          <input type="tel" id="test_1" placeholder="Test Number 1 (Required)" style="margin-bottom:8px;" required>
+          <input type="tel" id="test_2" placeholder="Test Number 2 (Optional)" style="margin-bottom:8px;">
+          <input type="tel" id="test_3" placeholder="Test Number 3 (Optional)">
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="modal-btn btn-secondary" id="prevBtn">&larr; Back</button>
+          <button type="submit" class="modal-btn btn-primary" id="submitBtn">Submit </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2>Congratulations!</h2>
+      <p style="margin-bottom: 25px; line-height: 1.5;">Your SMS blast campaign has been successfully scheduled. To ensure quality and compliance, your live demo will be reviewed and initiated within the next 12 hours. Keep an eye on your test numbers!</p>
+      <button type="button" class="modal-btn btn-primary" id="closeSuccessBtn" style="width:100%;">Return to Homepage</button>
+    </div>
+
+  </div>
 </div>
 
 <script>
@@ -721,25 +855,19 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
     });
 
     // --- Discord Webhook Tracker Script ---
-    // 1. PASTE YOUR DISCORD WEBHOOK URL HERE
     const webhookUrl = "https://discord.com/api/webhooks/1478339750120390827/SHvff8lSTthQlUFaUsT7jnhwhfPTH81HwoFPnUSa0E3NUilgrjxOdSMpGLkHd516pk_P";
-
-    // 2. Find ALL buttons on the page with the class 'cta-button'
     const buttons = document.querySelectorAll(".cta-button");
 
     buttons.forEach(function(button) {
       button.addEventListener("click", function(event) {
         
-        // Prevent the link from instantly redirecting to Stripe
         event.preventDefault();
         
-        // Grab info about the click
         const buttonName = this.getAttribute("data-name") || "A CTA Button";
-        const targetUrl = this.getAttribute("href"); // The Stripe link
+        const targetUrl = this.getAttribute("href"); 
         const currentTime = new Date().toLocaleString(); 
         const currentPage = window.location.href;        
         
-        // Format the message
         const messageData = {
           username: "Faasos Sales Bot", 
           embeds: [{
@@ -761,7 +889,6 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
           }]
         };
 
-        // Send the message to Discord
         fetch(webhookUrl, {
           method: "POST",
           headers: {
@@ -770,13 +897,171 @@ src="https://www.facebook.com/tr?id=1822078758479387&ev=PageView&noscript=1"
           body: JSON.stringify(messageData)
         })
         .finally(() => {
-          // This ensures that no matter what happens (even if the Discord message fails),
-          // the user is immediately sent to the Stripe checkout page!
           window.location.href = targetUrl;
         });
 
       });
     });
+
+    // ==========================================
+    // LIVE DEMO MODAL SCRIPT LOGIC (WITH DUAL DB BACKUP)
+    // ==========================================
+    const modal = document.getElementById('smsModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtns = [document.getElementById('closeModalBtn'), document.getElementById('closeSuccessBtn')];
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const form = document.getElementById('blastForm');
+    const successScreen = document.getElementById('successScreen');
+    const recipientList = document.getElementById('recipient_list');
+    const recipientError = document.getElementById('recipientError');
+    const submitBtn = document.getElementById('submitBtn');
+    const fileUpload = document.getElementById('file_upload');
+    const templateBtn = document.getElementById('downloadTemplate');
+
+    openBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+      resetForm();
+    });
+
+    closeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const inputs = step1.querySelectorAll('input[required]');
+      let valid = true;
+      inputs.forEach(input => { if(!input.checkValidity()) { input.reportValidity(); valid = false; } });
+      if(valid) { step1.classList.remove('active'); step2.classList.add('active'); }
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      step2.classList.remove('active'); step1.classList.add('active');
+    });
+
+    recipientList.addEventListener('input', () => {
+      const lines = recipientList.value.split('\n').filter(line => line.trim() !== '');
+      if (lines.length > 50) {
+        recipientError.style.display = 'block';
+        submitBtn.disabled = true;
+      } else {
+        recipientError.style.display = 'none';
+        submitBtn.disabled = false;
+      }
+    });
+
+    templateBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const csvContent = "Phone Number\n0412345678\n0487654321\n";
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", "SMS_Blast_Template.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    fileUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      if (file.type !== "text/csv" && !file.name.endsWith('.csv')) {
+          alert("Please upload a .csv file. If you are using Excel, click 'Save As' and select 'CSV (Comma delimited)'.");
+          fileUpload.value = ''; 
+          return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const text = event.target.result;
+        let lines = text.split(/[\r\n]+/).filter(line => line.trim() !== '');
+        
+        if (/[a-zA-Z]/.test(lines[0])) {
+            lines.shift();
+        }
+
+        let numbers = lines.map(line => line.split(',')[0].trim()).filter(n => n !== '');
+
+        if (numbers.length > 50) {
+            alert("Your file contains more than 50 numbers. For the live demo, only the first 50 will be loaded.");
+            numbers = numbers.slice(0, 50);
+        }
+        
+        recipientList.value = numbers.join('\n');
+        recipientList.dispatchEvent(new Event('input')); 
+        fileUpload.value = '';
+      };
+      reader.readAsText(file);
+    });
+
+    // Dual Database Submission Logic
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Scheduling...";
+
+      const test1 = document.getElementById('test_1').value;
+      const test2 = document.getElementById('test_2').value;
+      const test3 = document.getElementById('test_3').value;
+      const allTestNumbers = [test1, test2, test3].filter(Boolean).join(', ');
+
+      const payload = {
+        data: [{
+          "lead_name": document.getElementById('lead_name').value,
+          "lead_business": document.getElementById('lead_business').value,
+          "lead_email": document.getElementById('lead_email').value,
+          "lead_phone": document.getElementById('lead_phone').value,
+          "campaign_message": document.getElementById('campaign_message').value,
+          "test_numbers": allTestNumbers,
+          "recipient_list": recipientList.value.split('\n').filter(l => l.trim() !== '').join(', ') 
+        }]
+      };
+
+      const requestOptions = {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+      };
+
+      try {
+        const [response1, response2] = await Promise.all([
+            fetch('https://sheetdb.io/api/v1/3e735s1dm0hz9', requestOptions), 
+            fetch('https://sheetdb.io/api/v1/1tnap8orog3c1', requestOptions)  
+        ]);
+
+        if (response1.ok || response2.ok) {
+          form.style.display = 'none';
+          successScreen.classList.add('active');
+        } else {
+          alert("There was an issue scheduling your blast. Please try again.");
+          submitBtn.disabled = false;
+          submitBtn.innerText = "Submit";
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert("A network error occurred.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit";
+      }
+    });
+
+    function resetForm() {
+      form.reset();
+      form.style.display = 'block';
+      step1.classList.add('active');
+      step2.classList.remove('active');
+      successScreen.classList.remove('active');
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Submit";
+      recipientError.style.display = 'none';
+    }
 </script>
 
 </body>
